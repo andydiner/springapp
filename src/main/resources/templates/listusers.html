@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Users</title>
+
+    <style type="text/css">
+        .inP{ display: inline }
+    </style>
+</head>
+<body>
+<p>Hello, welcome to the home page!
+
+<h3 th:text = "${hello}" class = "inP"/> <h3 class = "inP">hello counts</h3>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each = "list: ${theList}">
+        <td th:text = "${list.id}"></td>
+        <td th:text = "${list.name}"></td>
+        <td th:text = "${list.email}"></td>
+    </tr>
+    </tbody>
+</table>
+<p />
+
+<!--<p th:text = "${theuser.id}"/>-->
+<!--<p th:text = "${theuser.email}"/>-->
+<!--<p th:text = "${theuser.name}"/>-->
+
+
+</p>
+</body>
+</html>

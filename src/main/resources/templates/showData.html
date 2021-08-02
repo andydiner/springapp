@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Page</title>
+
+    <style type="text/css">
+        .inP{ display: inline }
+    </style>
+</head>
+<body>
+
+
+<h1>New Data from user</h1>
+
+<p class ="inP">Hello, welcome to the home page!
+
+<p th:text = "${theuser.id}"/>
+<p th:text = "${theuser.email}"/>
+<p th:text = "${theuser.name}"/>
+</p>
+</body>
+</html>
