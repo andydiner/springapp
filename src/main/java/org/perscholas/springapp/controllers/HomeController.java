@@ -2,11 +2,15 @@ package org.perscholas.springapp.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.perscholas.springapp.models.User;
+import org.perscholas.springapp.repo.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +22,9 @@ import java.util.List;
 public class HomeController {
     //localhost:8080/ || localhost:8080/index || localhost:8080/Bobby
     // --> localhost:8080/api/v1/ || localhost:8080/api/v1index || localhost:8080/api/v1/Bobby
+
+    @Autowired
+   private UserRepo userRepo;
     @GetMapping("/listusers")
     public String listUser(Model model, @RequestParam("hello") int hello){
         List<User> listUsers = new ArrayList<User>();
@@ -49,8 +56,13 @@ public class HomeController {
 
 
     @PostMapping(value = "/process")
-    public String showPage(@ModelAttribute("theuser") User u, Model model){
-    model.addAttribute("theuser", u);
+    public String showPage(@ModelAttribute("theuser")@Valid User u, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+            log.warn(bindingResult.getAllErrors().toString() + " There is an error with the username.");
+            return "index";
+        }
+        model.addAttribute("theuser", u);
+        userRepo.save(u);
     return "showData";
     }
 
